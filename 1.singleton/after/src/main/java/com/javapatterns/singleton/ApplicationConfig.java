@@ -11,13 +11,11 @@ public class ApplicationConfig {
         this.environment = "development";
     }
 
-    public static ApplicationConfig getInstance() {
-        synchronized (ApplicationConfig.class) {
-            if (applicationConfig == null) {
-                applicationConfig = new ApplicationConfig();
-            }
-            return applicationConfig;
+    public static synchronized ApplicationConfig getInstance() {
+        if (applicationConfig == null) {
+            applicationConfig = new ApplicationConfig();
         }
+        return applicationConfig;
     }
 
     public String getApplicationName() {

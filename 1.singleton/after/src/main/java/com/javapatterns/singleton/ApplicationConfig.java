@@ -3,7 +3,7 @@ package com.javapatterns.singleton;
 public class ApplicationConfig {
     private final String applicationName;
     private final String environment;
-    private static ApplicationConfig applicationConfig = null;
+    private static final ApplicationConfig INSTANCE = new ApplicationConfig();
 
     private ApplicationConfig() {
         System.out.println("Loading application configuration...");
@@ -11,11 +11,8 @@ public class ApplicationConfig {
         this.environment = "development";
     }
 
-    public static synchronized ApplicationConfig getInstance() {
-        if (applicationConfig == null) {
-            applicationConfig = new ApplicationConfig();
-        }
-        return applicationConfig;
+    public static ApplicationConfig getInstance() {
+        return INSTANCE;
     }
 
     public String getApplicationName() {
